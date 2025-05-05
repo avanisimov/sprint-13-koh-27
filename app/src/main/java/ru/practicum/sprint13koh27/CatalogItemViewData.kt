@@ -15,7 +15,8 @@ data class CatalogItemViewData(
 }
 
 class CatalogItemViewHolder(
-    parent: ViewGroup, val binding: VCatalogItemBinding = VCatalogItemBinding.inflate(
+    parent: ViewGroup,
+    val binding: VCatalogItemBinding = VCatalogItemBinding.inflate(
         LayoutInflater.from(
             parent.context
         ), parent, false
@@ -27,7 +28,10 @@ class CatalogItemViewHolder(
     fun bind(viewData: CatalogItemViewData) {
         binding.root
 
-        Glide.with(binding.root.context).load(viewData.item.imageUrl).centerCrop().into(binding.image)
+        Glide.with(binding.root.context)
+            .load(viewData.item.imageUrl)
+            .centerCrop()
+            .into(binding.image)
         binding.title.text = viewData.item.name
         binding.price.text = "${viewData.item.price / 100}/${viewData.item.unit}"
 
