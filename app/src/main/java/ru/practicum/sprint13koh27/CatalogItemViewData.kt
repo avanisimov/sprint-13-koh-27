@@ -43,7 +43,7 @@ class CatalogItemViewHolder(
             .into(binding.image)
         binding.title.text = viewData.item.name
         val priceStr = moneyFormatter.format(viewData.item.price / 100f)
-        binding.price.text = "$priceStr/${viewData.item.unit}"
+        binding.price.text = "${priceStr}Р/${viewData.item.unit}"
 
         if (viewData.count != null) {
             if (viewData.count == 0) {
