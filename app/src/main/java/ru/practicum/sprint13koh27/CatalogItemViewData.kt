@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ru.practicum.sprint13koh27.databinding.VCatalogItemBinding
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 
 data class CatalogItemViewData(
     val item: CatalogItem,
@@ -25,6 +27,13 @@ class CatalogItemViewHolder(
     binding.root
 ) {
 
+    private val moneyFormatter = DecimalFormat().apply {
+        decimalFormatSymbols = DecimalFormatSymbols().apply {
+            decimalSeparator = ','
+        }
+        minimumFractionDigits = 2
+    }
+
     fun bind(viewData: CatalogItemViewData) {
         binding.root
 
@@ -33,7 +42,8 @@ class CatalogItemViewHolder(
             .centerCrop()
             .into(binding.image)
         binding.title.text = viewData.item.name
-        binding.price.text = "${viewData.item.price / 100}/${viewData.item.unit}"
+        val priceStr = moneyFormatter.format(viewData.item.price / 100f)
+        binding.price.text = "$priceStr/${viewData.item.unit}"
 
         if (viewData.count != null) {
             if (viewData.count == 0) {
